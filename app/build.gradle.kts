@@ -41,4 +41,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
+    implementation(libs.gson)
+    implementation(libs.okhttp.logging)
+    implementation(libs.viewmodel)
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
 }
