@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Header Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardElevation="1dp"
+                app:cardCornerRadius="12dp"
+                app:strokeWidth="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageButton
+                        android:id="@+id/detailBackButton"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_chevron_left"
+                        android:contentDescription="Back"
+                        android:rotation="180"
+                        android:tint="?attr/colorOnSurface"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/habitDetailTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        android:textColor="?attr/colorOnSurface"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/detailBackButton"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/habitDetailDescription"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:textSize="14sp"
+                        android:lineSpacingExtra="4dp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:alpha="0.7"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/habitDetailTitle" />
+
+                    <TextView
+                        android:id="@+id/habitDetailCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="3dp"
+                        android:textSize="12sp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:alpha="0.7"
+                        android:background="@drawable/chip_background"
+                        android:backgroundTint="?attr/colorSurfaceVariant"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/habitDetailDescription" />
+
+                    <TextView
+                        android:id="@+id/habitDetailStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="10dp"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="3dp"
+                        android:textSize="12sp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:alpha="0.5"
+                        android:background="@drawable/chip_background"
+                        android:backgroundTint="?attr/colorSurfaceVariant"
+                        app:layout_constraintStart_toEndOf="@id/habitDetailCategory"
+                        app:layout_constraintTop_toBottomOf="@id/habitDetailDescription" />
+
+                    <TextView
+                        android:id="@+id/habitDetailFrequency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="10dp"
+                        android:textSize="12sp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:alpha="0.5"
+                        app:layout_constraintStart_toEndOf="@id/habitDetailStatus"
+                        app:layout_constraintTop_toBottomOf="@id/habitDetailDescription" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Stats Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardElevation="1dp"
+                app:cardCornerRadius="12dp"
+                app:strokeWidth="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/streakLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Streak"
+                        android:textSize="11sp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:alpha="0.5"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toStartOf="@id/divider1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/streakValue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/streak_color"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toStartOf="@id/divider1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/streakLabel" />
+
+                    <View
+                        android:id="@+id/divider1"
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:background="?attr/colorOutline"
+                        android:alpha="0.3"
+                        app:layout_constraintEnd_toStartOf="@id/bestStreakLabel"
+                        app:layout_constraintStart_toEndOf="@id/streakLabel"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@id/streakValue" />
+
+                    <TextView
+                        android:id="@+id/bestStreakLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Best"
+                        android:textSize="11sp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:alpha="0.5"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toStartOf="@id/divider2"
+                        app:layout_constraintStart_toEndOf="@id/divider1"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/bestStreakValue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorPrimary"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toStartOf="@id/divider2"
+                        app:layout_constraintStart_toEndOf="@id/divider1"
+                        app:layout_constraintTop_toBottomOf="@id/bestStreakLabel" />
+
+                    <View
+                        android:id="@+id/divider2"
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:background="?attr/colorOutline"
+                        android:alpha="0.3"
+                        app:layout_constraintEnd_toStartOf="@id/totalLabel"
+                        app:layout_constraintStart_toEndOf="@id/bestStreakLabel"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@id/bestStreakValue" />
+
+                    <TextView
+                        android:id="@+id/totalLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Total"
+                        android:textSize="11sp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:alpha="0.5"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toStartOf="@id/divider3"
+                        app:layout_constraintStart_toEndOf="@id/divider2"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/totalValue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorOnSurface"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toStartOf="@id/divider3"
+                        app:layout_constraintStart_toEndOf="@id/divider2"
+                        app:layout_constraintTop_toBottomOf="@id/totalLabel" />
+
+                    <View
+                        android:id="@+id/divider3"
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:background="?attr/colorOutline"
+                        android:alpha="0.3"
+                        app:layout_constraintEnd_toStartOf="@id/missedLabel"
+                        app:layout_constraintStart_toEndOf="@id/totalLabel"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@id/totalValue" />
+
+                    <TextView
+                        android:id="@+id/missedLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Missed"
+                        android:textSize="11sp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:alpha="0.5"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/divider3"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/missedValue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/delete_color"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/divider3"
+                        app:layout_constraintTop_toBottomOf="@id/missedLabel" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Edit Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/editHabitButton"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="12dp"
+                android:text="Edit Habit"
+                android:textSize="14sp" />
+
+            <!-- Logs Section -->
+            <LinearLayout
+                android:id="@+id/logSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Recent Activity"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorOnSurface" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="?attr/colorOutline"
+                    android:alpha="0.2" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/habitLogsList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false" />
+
+            </LinearLayout>
+
+            <!-- Delete Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/deleteHabitButton"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:text="Delete Habit"
+                android:textColor="@color/delete_color"
+                android:textSize="14sp" />
+
+            <!-- Loading -->
+            <ProgressBar
+                android:id="@+id/detailLoadingSpinner"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="32dp"
+                android:indeterminateTint="?attr/colorPrimary"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

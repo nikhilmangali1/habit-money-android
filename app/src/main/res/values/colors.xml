@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Light palette -->
+    <color name="light_primary">#0D9488</color>
+    <color name="light_onPrimary">#FFFFFF</color>
+    <color name="light_primaryContainer">#CCFBF1</color>
+    <color name="light_onPrimaryContainer">#022C22</color>
+    <color name="light_secondary">#0EA5E9</color>
+    <color name="light_onSecondary">#FFFFFF</color>
+    <color name="light_secondaryContainer">#E0F2FE</color>
+    <color name="light_onSecondaryContainer">#0C4A6E</color>
+    <color name="light_surface">#FFFFFF</color>
+    <color name="light_onSurface">#1C1B1F</color>
+    <color name="light_surfaceVariant">#F1F5F9</color>
+    <color name="light_background">#F8FAFC</color>
+    <color name="light_outline">#CBD5E1</color>
+
+    <!-- Dark palette -->
+    <color name="dark_primary">#2DD4BF</color>
+    <color name="dark_onPrimary">#022C22</color>
+    <color name="dark_primaryContainer">#134E48</color>
+    <color name="dark_onPrimaryContainer">#A7F3D0</color>
+    <color name="dark_secondary">#38BDF8</color>
+    <color name="dark_onSecondary">#082F49</color>
+    <color name="dark_secondaryContainer">#0369A1</color>
+    <color name="dark_onSecondaryContainer">#BAE6FD</color>
+    <color name="dark_surface">#1C1B1F</color>
+    <color name="dark_onSurface">#E6E1E5</color>
+    <color name="dark_surfaceVariant">#2D3748</color>
+    <color name="dark_background">#0F172A</color>
+    <color name="dark_outline">#475569</color>
+
+    <!-- Semantic colors -->
+    <color name="streak_color">#F97316</color>
+    <color name="delete_color">#EF4444</color>
+    <color name="success_color">#22C55E</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

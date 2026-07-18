@@ -45,9 +45,12 @@ public class DashboardFragment extends Fragment {
                     .navigate(R.id.action_dashboard_to_login);
         });
 
+        habitsCard.setOnClickListener(v ->
+                NavHostFragment.findNavController(this)
+                        .navigate(R.id.habits_list_fragment));
+
         View.OnClickListener comingSoon = v ->
                 Toast.makeText(requireContext(), "Coming soon!", Toast.LENGTH_SHORT).show();
-        habitsCard.setOnClickListener(comingSoon);
         financesCard.setOnClickListener(comingSoon);
         calendarCard.setOnClickListener(comingSoon);
     }
