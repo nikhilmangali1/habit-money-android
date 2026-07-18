@@ -35,7 +35,8 @@ public class AuthRepository {
                     tokenManager.saveTokens(
                             auth.getAccessToken(),
                             auth.getRefreshToken(),
-                            auth.getEmail()
+                            auth.getEmail(),
+                            auth.getFirstName()
                     );
                     callback.onSuccess(auth);
                 } else {
@@ -73,7 +74,8 @@ public class AuthRepository {
                     tokenManager.saveTokens(
                             auth.getAccessToken(),
                             auth.getRefreshToken(),
-                            auth.getEmail()
+                            auth.getEmail(),
+                            auth.getFirstName()
                     );
                     callback.onSuccess(auth);
                 } else {
@@ -103,7 +105,8 @@ public class AuthRepository {
                     tokenManager.saveTokens(
                             auth.getAccessToken(),
                             auth.getRefreshToken(),
-                            auth.getEmail()
+                            auth.getEmail(),
+                            auth.getFirstName()
                     );
                     callback.onSuccess(auth);
                 } else {

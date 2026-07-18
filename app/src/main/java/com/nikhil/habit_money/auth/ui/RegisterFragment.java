@@ -73,9 +73,8 @@ public class RegisterFragment extends Fragment {
 
         viewModel.getAuthResult().observe(getViewLifecycleOwner(), response -> {
             if (response != null) {
-                String name = response.getFirstName() != null ? response.getFirstName() : "";
-                Toast.makeText(requireContext(), "Welcome" + (name.isEmpty() ? "" : ", " + name) + "!", Toast.LENGTH_SHORT).show();
-                // TODO: Navigate to DashboardFragment once created
+                NavHostFragment.findNavController(this)
+                        .navigate(R.id.action_register_to_dashboard);
             }
         });
     }
