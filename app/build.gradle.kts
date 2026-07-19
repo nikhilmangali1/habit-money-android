@@ -20,8 +20,18 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL",
+                "\"${project.findProperty("base.url") ?: "http://10.0.2.2:8080/"}\"")
+        }
         release {
+            buildConfigField("String", "BASE_URL",
+                "\"${project.findProperty("base.url") ?: "http://10.0.2.2:8080/"}\"")
             optimization {
                 enable = false
             }

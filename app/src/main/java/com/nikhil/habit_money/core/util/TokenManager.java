@@ -3,6 +3,8 @@ package com.nikhil.habit_money.core.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.nikhil.habit_money.BuildConfig;
+
 public class TokenManager {
 
     private static final String PREF_NAME = "habit_money";
@@ -10,6 +12,7 @@ public class TokenManager {
     private static final String KEY_REFRESH_TOKEN = "refresh_token";
     private static final String KEY_EMAIL = "user_email";
     private static final String KEY_FIRST_NAME = "first_name";
+    private static final String KEY_VERSION_CODE = "version_code";
 
     private final SharedPreferences prefs;
 
@@ -23,7 +26,12 @@ public class TokenManager {
                 .putString(KEY_REFRESH_TOKEN, refreshToken)
                 .putString(KEY_EMAIL, email)
                 .putString(KEY_FIRST_NAME, firstName)
+                .putInt(KEY_VERSION_CODE, BuildConfig.VERSION_CODE)
                 .apply();
+    }
+
+    public boolean isSameBuild() {
+        return prefs.getInt(KEY_VERSION_CODE, -1) == BuildConfig.VERSION_CODE;
     }
 
     public String getAccessToken() {
