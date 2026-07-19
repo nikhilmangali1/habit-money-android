@@ -28,10 +28,14 @@ android {
         debug {
             buildConfigField("String", "BASE_URL",
                 "\"${project.findProperty("base.url") ?: "http://10.0.2.2:8080/"}\"")
+            buildConfigField("String", "GOOGLE_SERVER_CLIENT_ID",
+                "\"${project.findProperty("google.server.client.id") ?: "66148283642-68qepdsnidmuj1lfbgk8odpc0ff6jmre.apps.googleusercontent.com"}\"")
         }
         release {
             buildConfigField("String", "BASE_URL",
                 "\"${project.findProperty("base.url") ?: "http://10.0.2.2:8080/"}\"")
+            buildConfigField("String", "GOOGLE_SERVER_CLIENT_ID",
+                "\"${project.findProperty("google.server.client.id") ?: "66148283642-68qepdsnidmuj1lfbgk8odpc0ff6jmre.apps.googleusercontent.com"}\"")
             optimization {
                 enable = false
             }
@@ -58,4 +62,7 @@ dependencies {
     implementation(libs.viewmodel)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    implementation(libs.credentials)
+    implementation(libs.credentials.play.services.auth)
+    implementation(libs.googleid)
 }
