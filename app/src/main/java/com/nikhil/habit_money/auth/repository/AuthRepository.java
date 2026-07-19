@@ -3,6 +3,7 @@ package com.nikhil.habit_money.auth.repository;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.nikhil.habit_money.auth.model.AuthResponse;
+import com.nikhil.habit_money.auth.model.GoogleLoginRequest;
 import com.nikhil.habit_money.auth.model.LoginRequest;
 import com.nikhil.habit_money.auth.model.LogoutRequest;
 import com.nikhil.habit_money.auth.model.RefreshTokenRequest;
@@ -67,6 +68,32 @@ public class AuthRepository {
     public void login(String email, String password, AuthCallback callback) {
         LoginRequest request = new LoginRequest(email, password);
         apiService.login(request).enqueue(new Callback<AuthResponse>() {
+            @Override
+            public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    AuthResponse auth = response.body();
+                    tokenManager.saveTokens(
+                            auth.getAccessToken(),
+                            auth.getRefreshToken(),
+                            auth.getEmail(),
+                            auth.getFirstName()
+                    );
+                    callback.onSuccess(auth);
+                } else {
+                    callback.onError(extractErrorMessage(response));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AuthResponse> call, Throwable t) {
+                callback.onError("Network error: " + t.getMessage());
+            }
+        });
+    }
+
+    public void googleLogin(String idToken, AuthCallback callback) {
+        GoogleLoginRequest request = new GoogleLoginRequest(idToken);
+        apiService.googleLogin(request).enqueue(new Callback<AuthResponse>() {
             @Override
             public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {

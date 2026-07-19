@@ -64,6 +64,26 @@ public class AuthViewModel extends ViewModel {
         });
     }
 
+    public void googleLogin(String idToken) {
+        loading.setValue(true);
+        error.setValue(null);
+        authResult.setValue(null);
+
+        repository.googleLogin(idToken, new AuthCallback() {
+            @Override
+            public void onSuccess(AuthResponse response) {
+                loading.setValue(false);
+                authResult.setValue(response);
+            }
+
+            @Override
+            public void onError(String message) {
+                loading.setValue(false);
+                error.setValue(message);
+            }
+        });
+    }
+
     public void clearError() {
         error.setValue(null);
     }

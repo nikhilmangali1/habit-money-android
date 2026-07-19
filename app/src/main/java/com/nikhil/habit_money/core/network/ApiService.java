@@ -1,6 +1,7 @@
 package com.nikhil.habit_money.core.network;
 
 import com.nikhil.habit_money.auth.model.AuthResponse;
+import com.nikhil.habit_money.auth.model.GoogleLoginRequest;
 import com.nikhil.habit_money.auth.model.LoginRequest;
 import com.nikhil.habit_money.auth.model.LogoutRequest;
 import com.nikhil.habit_money.auth.model.RefreshTokenRequest;
@@ -38,6 +39,9 @@ public interface ApiService {
 
     @POST("api/v1/auth/refresh")
     Call<AuthResponse> refreshToken(@Body RefreshTokenRequest request);
+
+    @POST("api/v1/auth/google")
+    Call<AuthResponse> googleLogin(@Body GoogleLoginRequest request);
 
     @POST("api/v1/auth/logout")
     Call<Void> logout(@Body LogoutRequest request);

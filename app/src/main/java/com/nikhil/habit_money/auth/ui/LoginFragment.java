@@ -1,6 +1,7 @@
 package com.nikhil.habit_money.auth.ui;
 
 import android.os.Bundle;
+import android.os.CancellationSignal;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +10,21 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.credentials.CredentialManager;
+import androidx.credentials.CredentialManagerCallback;
+import androidx.credentials.GetCredentialRequest;
+import androidx.credentials.GetCredentialResponse;
+import androidx.credentials.exceptions.GetCredentialException;
+import androidx.credentials.exceptions.NoCredentialException;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.google.android.libraries.identity.googleid.GetGoogleIdOption;
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.nikhil.habit_money.BuildConfig;
 import com.nikhil.habit_money.R;
 import com.nikhil.habit_money.auth.repository.AuthRepository;
 import com.nikhil.habit_money.auth.viewmodel.AuthViewModel;
@@ -22,12 +32,15 @@ import com.nikhil.habit_money.auth.viewmodel.AuthViewModelFactory;
 import com.nikhil.habit_money.core.network.RetrofitClient;
 import com.nikhil.habit_money.core.util.TokenManager;
 
+import java.util.concurrent.Executor;
+
 public class LoginFragment extends Fragment {
 
     private AuthViewModel viewModel;
     private TextInputEditText emailInput;
     private TextInputEditText passwordInput;
     private MaterialButton loginButton;
+    private MaterialButton googleSignInButton;
     private ProgressBar loadingSpinner;
     private View registerLink;
 
@@ -44,6 +57,7 @@ public class LoginFragment extends Fragment {
         emailInput = view.findViewById(R.id.emailInput);
         passwordInput = view.findViewById(R.id.passwordInput);
         loginButton = view.findViewById(R.id.loginButton);
+        googleSignInButton = view.findViewById(R.id.googleSignInButton);
         loadingSpinner = view.findViewById(R.id.loadingSpinner);
         registerLink = view.findViewById(R.id.registerLink);
 
@@ -53,12 +67,14 @@ public class LoginFragment extends Fragment {
         viewModel = new ViewModelProvider(this, factory).get(AuthViewModel.class);
 
         loginButton.setOnClickListener(v -> attemptLogin());
+        googleSignInButton.setOnClickListener(v -> signInWithGoogle());
         registerLink.setOnClickListener(v ->
                 NavHostFragment.findNavController(this).navigate(R.id.action_login_to_register));
 
         viewModel.getLoading().observe(getViewLifecycleOwner(), isLoading -> {
             loadingSpinner.setVisibility(isLoading ? View.VISIBLE : View.GONE);
             loginButton.setEnabled(!isLoading);
+            googleSignInButton.setEnabled(!isLoading);
         });
 
         viewModel.getError().observe(getViewLifecycleOwner(), error -> {
@@ -89,5 +105,44 @@ public class LoginFragment extends Fragment {
         }
 
         viewModel.login(email, password);
+    }
+
+    private void signInWithGoogle() {
+        CredentialManager credentialManager = CredentialManager.create(requireContext());
+
+        GetGoogleIdOption option = new GetGoogleIdOption.Builder()
+                .setServerClientId(BuildConfig.GOOGLE_SERVER_CLIENT_ID)
+                .setFilterByAuthorizedAccounts(false)
+                .build();
+
+        GetCredentialRequest request = new GetCredentialRequest.Builder()
+                .addCredentialOption(option)
+                .build();
+
+        Executor mainExecutor = requireActivity().getMainExecutor();
+
+        credentialManager.getCredentialAsync(
+                requireActivity(),
+                request,
+                new CancellationSignal(),
+                mainExecutor,
+                new CredentialManagerCallback<GetCredentialResponse, GetCredentialException>() {
+                    @Override
+                    public void onResult(GetCredentialResponse result) {
+                        GoogleIdTokenCredential credential = GoogleIdTokenCredential
+                                .createFrom(result.getCredential().getData());
+                        String idToken = credential.getIdToken();
+                        viewModel.googleLogin(idToken);
+                    }
+
+                    @Override
+                    public void onError(GetCredentialException e) {
+                        if (e instanceof NoCredentialException) {
+                            return;
+                        }
+                        Toast.makeText(requireContext(), "Google Sign-In failed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
     }
 }
