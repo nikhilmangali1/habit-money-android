@@ -76,6 +76,9 @@ public interface ApiService {
 
     // --- Summaries ---
 
+    @GET("api/v1/habits/summary/daily")
+    Call<HabitSummary> getDailySummary();
+
     @GET("api/v1/habits/summary/weekly")
     Call<HabitSummary> getWeeklySummary();
 

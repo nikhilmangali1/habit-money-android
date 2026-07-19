@@ -181,6 +181,24 @@ public class HabitRepository {
 
     // --- Summaries ---
 
+    public void getDailySummary(HabitCallback<HabitSummary> callback) {
+        apiService.getDailySummary().enqueue(new Callback<HabitSummary>() {
+            @Override
+            public void onResponse(Call<HabitSummary> call, Response<HabitSummary> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    callback.onSuccess(response.body());
+                } else {
+                    callback.onError(extractErrorMessage(response));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HabitSummary> call, Throwable t) {
+                callback.onError("Network error: " + t.getMessage());
+            }
+        });
+    }
+
     public void getWeeklySummary(HabitCallback<HabitSummary> callback) {
         apiService.getWeeklySummary().enqueue(new Callback<HabitSummary>() {
             @Override
